@@ -12,7 +12,7 @@ var jugador_data : Array
 var jugador : Array
 
 #variables de movimiento
-var start_pos = Vector2(9, 9)
+var start_pos = Vector2(13, 17)
 var up = Vector2(0, -1)
 var down = Vector2(0, 1)
 var left = Vector2(-1,0)
@@ -22,13 +22,13 @@ var can_move: bool
 
 #variables grillas
 var cells : int = 15
-var cell_size : int = 50
+var cell_size : int = 32
 
 #limites grilla
-var limit_up = 2
-var limit_down = 16
-var limit_left = 2
-var limit_right = 16
+var limit_up = start_pos[1] - 7
+var limit_down = start_pos[1] + 7
+var limit_left = start_pos[0] - 7
+var limit_right = start_pos[0] + 7
 
 func _ready():
 	new_game()

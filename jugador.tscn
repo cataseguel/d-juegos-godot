@@ -4,6 +4,6 @@
 bg_color = Color(0.365181, 0.62127, 0.863581, 1)
 
 [node name="jugador" type="Panel"]
-offset_right = 50.0
-offset_bottom = 50.0
+offset_right = 16.0
+offset_bottom = 16.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_shl25")
