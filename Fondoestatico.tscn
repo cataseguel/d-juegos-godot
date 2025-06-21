@@ -1,0 +1,36 @@
+[gd_scene load_steps=7 format=3 uid="uid://cyijo7vrjgp7c"]
+
+[ext_resource type="Texture2D" uid="uid://bv58oirqi3j0e" path="res://img/cuadro.png" id="1_f3eer"]
+[ext_resource type="Texture2D" uid="uid://cavmrjjk8ktiv" path="res://img/paloma.png" id="2_43rwd"]
+[ext_resource type="Texture2D" uid="uid://cop7lagmyl1k7" path="res://img/silla.png" id="3_gedh0"]
+[ext_resource type="Texture2D" uid="uid://ddfcwcbddn2nk" path="res://img/r-indiferente.png" id="4_sqnfc"]
+[ext_resource type="Texture2D" uid="uid://dhf17ob0dgysg" path="res://img/velas.png" id="5_xl3vp"]
+[ext_resource type="Texture2D" uid="uid://b5c7xvvisffml" path="res://img/borrar.png" id="6_ntqrb"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Cuadro" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_f3eer")
+
+[node name="Paloma" type="Sprite2D" parent="."]
+position = Vector2(705.555, 174.5)
+scale = Vector2(0.328704, 0.328704)
+texture = ExtResource("2_43rwd")
+
+[node name="Silla" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("3_gedh0")
+
+[node name="R-indiferente" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("4_sqnfc")
+
+[node name="Velas" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("5_xl3vp")
+
+[node name="Borrar" type="Sprite2D" parent="."]
+position = Vector2(894.5, 843.5)
+scale = Vector2(0.229367, 0.229367)
+texture = ExtResource("6_ntqrb")

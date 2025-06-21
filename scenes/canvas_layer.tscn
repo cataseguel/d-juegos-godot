@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c45xsfsigbu0e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wf015"]
+bg_color = Color(0.763826, 0.460197, 0.842748, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v2lfg"]
+font_size = 27
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Progreso" type="Panel" parent="."]
+anchors_preset = -1
+anchor_top = 0.932407
+anchor_right = 0.317708
+anchor_bottom = 0.968518
+offset_left = 151.0
+offset_top = -93.0
+offset_right = 151.0
+offset_bottom = -93.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wf015")
+metadata/_edit_use_anchors_ = true
+
+[node name="ProgresoLabel" type="Label" parent="."]
+offset_left = 187.0
+offset_top = 913.0
+offset_right = 309.0
+offset_bottom = 952.0
+text = "Progreso"
+label_settings = SubResource("LabelSettings_v2lfg")
+horizontal_alignment = 2
