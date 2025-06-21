@@ -24,10 +24,15 @@ var can_move: bool
 var cells : int = 15
 var cell_size : int = 50
 
+#limites grilla
+var limit_up = 2
+var limit_down = 16
+var limit_left = 2
+var limit_right = 16
+
 func _ready():
 	new_game()
 	
-#función de la culebra, hay que cambiarlo
 func new_game():
 	score = 0
 	$CanvasLayer.get_node("ProgresoLabel").text = "Progreso: " + str(score)
@@ -39,8 +44,7 @@ func generate_jugador():
 	old_data.clear()
 	jugador_data.clear()
 	jugador.clear()
-	for i in range(3):
-		add_segment(start_pos + Vector2(0, i))
+	
 	
 func add_segment(pos):
 	jugador_data.append(pos)
@@ -85,6 +89,19 @@ func start_game():
 func _on_move_timer_timeout() -> void:
 	can_move = true
 	old_data = [] + jugador_data
+	
+	if(jugador_data[0][0] < limit_left + 1 and move_direction[0] < 0):
+		move_direction[0] = 0
+		
+	if(jugador_data[0][0] > limit_right - 1 and move_direction[0] > 0):
+		move_direction[0] = 0
+		
+	if(jugador_data[0][1] < limit_up + 1 and move_direction[1] < 0):
+		move_direction[1] = 0
+		
+	if(jugador_data[0][1] > limit_down - 1 and move_direction[1] > 0):
+		move_direction[1] = 0
+		
 	jugador_data[0] += move_direction
 	for i in range(len(jugador_data)):
 		if i > 0:
