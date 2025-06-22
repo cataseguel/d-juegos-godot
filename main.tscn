@@ -1,17 +1,53 @@
-[gd_scene load_steps=5 format=3 uid="uid://du6sj4jrsh4cw"]
+[gd_scene load_steps=11 format=3 uid="uid://du6sj4jrsh4cw"]
 
 [ext_resource type="Script" uid="uid://n3pdgmn132sd" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bv58oirqi3j0e" path="res://img/cuadro.png" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://cajnast1x07yl" path="res://scenes/jugador.tscn" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://djgvpgl5pbq4v" path="res://canvas_layer.tscn" id="3_lquwl"]
+[ext_resource type="Texture2D" uid="uid://b5c7xvvisffml" path="res://img/borrar.png" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://cop7lagmyl1k7" path="res://img/silla.png" id="6_kek77"]
+[ext_resource type="Texture2D" uid="uid://dhf17ob0dgysg" path="res://img/velas.png" id="7_4c57u"]
+[ext_resource type="Texture2D" uid="uid://cavmrjjk8ktiv" path="res://img/paloma.png" id="8_efxa6"]
+[ext_resource type="Texture2D" uid="uid://ddfcwcbddn2nk" path="res://img/r-indiferente.png" id="9_kek77"]
+[ext_resource type="Texture2D" uid="uid://c6vd4umlsfk2a" path="res://img/grilla.png" id="10_4c57u"]
 
-[node name="Main" type="Node"]
+[node name="MainGameplay" type="Node"]
 script = ExtResource("1_h2yge")
 jugador_scene = ExtResource("2_lquwl")
 
-[node name="fondo" type="Sprite2D" parent="."]
+[node name="Fondo" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("2_1bvp3")
+
+[node name="Borrar" type="Sprite2D" parent="."]
+position = Vector2(894, 835)
+scale = Vector2(0.25, 0.242)
+texture = ExtResource("5_5vw27")
+
+[node name="Silla" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("6_kek77")
+
+[node name="Velas" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("7_4c57u")
+
+[node name="Cuadro" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("2_1bvp3")
+
+[node name="Paloma" type="Sprite2D" parent="."]
+position = Vector2(712, 186)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_efxa6")
+
+[node name="Reina" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("9_kek77")
+
+[node name="Grilla" type="Sprite2D" parent="."]
+position = Vector2(444.8, 608)
+texture = ExtResource("10_4c57u")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lquwl")]
 
