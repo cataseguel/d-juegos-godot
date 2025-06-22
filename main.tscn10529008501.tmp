@@ -1,14 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://du6sj4jrsh4cw"]
+[gd_scene load_steps=13 format=3 uid="uid://du6sj4jrsh4cw"]
 
 [ext_resource type="Script" uid="uid://n3pdgmn132sd" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bv58oirqi3j0e" path="res://img/cuadro.png" id="2_1bvp3"]
-[ext_resource type="PackedScene" uid="uid://cq1y73u35ddhl" path="res://reference.tscn" id="2_dg77c"]
 [ext_resource type="PackedScene" uid="uid://fpgxlha04syg" path="res://canvas_layer.tscn" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://b5c7xvvisffml" path="res://img/borrar.png" id="5_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cop7lagmyl1k7" path="res://img/silla.png" id="6_kek77"]
 [ext_resource type="Texture2D" uid="uid://dhf17ob0dgysg" path="res://img/velas.png" id="7_4c57u"]
 [ext_resource type="Texture2D" uid="uid://cavmrjjk8ktiv" path="res://img/paloma.png" id="8_efxa6"]
-[ext_resource type="Texture2D" uid="uid://bjsqpttfs7ln3" path="res://img/grilla-chica.png" id="9_efxa6"]
 [ext_resource type="Texture2D" uid="uid://ddfcwcbddn2nk" path="res://img/r-indiferente.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://c6vd4umlsfk2a" path="res://img/grilla.png" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://3k50q4ehmukb" path="res://img/imaginacion.png" id="10_efxa6"]
@@ -31,7 +29,6 @@ _bundled = {
 
 [node name="MainGameplay" type="Node"]
 script = ExtResource("1_h2yge")
-reference_scene = ExtResource("2_dg77c")
 jugador_scene = SubResource("PackedScene_kek77")
 
 [node name="Fondo" type="Sprite2D" parent="."]
@@ -64,10 +61,6 @@ texture = ExtResource("9_kek77")
 position = Vector2(444.8, 608)
 texture = ExtResource("10_4c57u")
 
-[node name="GrillaChica" type="Sprite2D" parent="."]
-position = Vector2(1159, 236)
-texture = ExtResource("9_efxa6")
-
 [node name="Imaginacion" type="Sprite2D" parent="."]
 position = Vector2(960, 540)
 texture = ExtResource("10_efxa6")
@@ -75,6 +68,6 @@ texture = ExtResource("10_efxa6")
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lquwl")]
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

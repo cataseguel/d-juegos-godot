@@ -75,6 +75,6 @@ texture = ExtResource("10_efxa6")
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lquwl")]
 
 [node name="MoveTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

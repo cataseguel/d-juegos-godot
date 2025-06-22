@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cajnast1x07yl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shl25"]
-bg_color = Color(0.365181, 0.62127, 0.863581, 1)
-
-[node name="jugador" type="Panel"]
-offset_right = 32.0
-offset_bottom = 32.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_shl25")
