@@ -21,7 +21,7 @@ var levels = [
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
-	[0,0,1,1,1,1,1,-1,1,1,1,1,1,0,0],
+	[0,0,1,1,1,1,1,1,1,1,1,1,1,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   ],
   [
@@ -64,8 +64,10 @@ var levels = [
 # Estado del juego general
 var game_started : bool = false
 var level_index : int = 1
+var inside : int = 0
 var score : int = 0
 var level : Array = []
+var time = 100.0
 
 # Movimiento y estado del jugador
 var move_direction = Vector2(0, 0)
@@ -152,7 +154,6 @@ func set_starting_point():
 			if (level[i][j] == -1):
 				var pos = Vector2(j, i)
 				start_pos = pos
-				print(pos)
 				return
 
 # Mueve el jugador en base a las teclas presionadas
@@ -160,18 +161,26 @@ func move_jugador():
 	move_direction = Vector2(0, 0)
 	# Chequear las teclas presionadas por el jugador para moverse
 	if can_move:
-		if Input.is_action_pressed("move_down") and move_direction != up:
+		if Input.is_action_pressed("move_down"):
 			move_direction = down
+			game_started = true
 			can_move = false
-		if Input.is_action_pressed("move_up") and move_direction != down:
+			$ClockTimer.start()
+		if Input.is_action_pressed("move_up"):
 			move_direction = up
+			game_started = true
 			can_move = false
-		if Input.is_action_pressed("move_left") and move_direction != right:
+			$ClockTimer.start()
+		if Input.is_action_pressed("move_left"):
 			move_direction = left
+			game_started = true
 			can_move = false
-		if Input.is_action_pressed("move_right") and move_direction != left:
+			$ClockTimer.start()
+		if Input.is_action_pressed("move_right"):
 			move_direction = right
+			game_started = true
 			can_move = false
+			$ClockTimer.start()
 		# Agrega el movimiento a la traza
 		old_data = [] + jugador_data
 		# Limita al jugador dentro de los limites de la grilla
@@ -198,26 +207,18 @@ func move_jugador():
 # o fuera del trazo que hay que recrear
 func set_queen_state():
 	var points = len(jugador_data)
-	if (points < 10):
+	var errores = points - inside
+	if (errores <= 2):
 		$Reina.texture = preload("res://img/r-indiferente.png")
 		return
-	if (points >= 10):
-		var tasa_acierto = score / points
-		if (tasa_acierto > 0.6):
-			$Reina.texture = preload("res://img/r-indiferente.png")
-			return
-		if (tasa_acierto > 0.3):
-			$Reina.texture = preload("res://img/r-sorprendida.png")
-			return
-		if (tasa_acierto > 0.2):
-			$Reina.texture = preload("res://img/r-molesta.png")
-			return
-		$Reina.texture = preload("res://img/r-decepcionada.png")
+	if (errores <= 6):
+		$Reina.texture = preload("res://img/r-sorprendida.png")
+		return
+	if (errores <= 10):
+		$Reina.texture = preload("res://img/r-molesta.png")
+		return
+	$Reina.texture = preload("res://img/r-decepcionada.png")
 	return
-
-# Empieza el estado general del juego
-func start_game():
-	game_started = true
 
 # Reinicia el nivel al hacer click en el tarrito de borrar
 func restart_level(event):
@@ -235,21 +236,20 @@ func restart_level(event):
 # Cuando pase un tiempo permitir al jugador moverse denuevo
 func _on_move_timer_timeout() -> void:
 	can_move = true
-	
+
 # Valida el paso actual con el correcto
 func validate_step(nuevo_paso):
 	var x = int(nuevo_paso.x)
 	var y = int(nuevo_paso.y)
 	var correcto = level[y][x];
 	if (correcto == 1):
-		score += 1
-	if (correcto == 0):
-		score -= 1
-	if (score < 0):
-		score = 0
-	if (score > 100):
-		score = 100
+		inside += 1
 
 # Modifica la barra en base al progreso del jugador
 func set_progress():
 	$CanvasLayer.get_node("Progreso").scale.x = float(score) / 100.0
+
+func _on_clock_timer_timeout() -> void:
+	$ClockTimer.start()
+	$Tiempo.value = time
+	time -= 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://du6sj4jrsh4cw"]
+[gd_scene load_steps=16 format=3 uid="uid://du6sj4jrsh4cw"]
 
 [ext_resource type="Script" uid="uid://n3pdgmn132sd" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bv58oirqi3j0e" path="res://img/cuadro.png" id="2_1bvp3"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ddfcwcbddn2nk" path="res://img/r-indiferente.png" id="9_kek77"]
 [ext_resource type="Texture2D" uid="uid://c6vd4umlsfk2a" path="res://img/grilla.png" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://3k50q4ehmukb" path="res://img/imaginacion.png" id="10_efxa6"]
+[ext_resource type="Texture2D" uid="uid://b5v0r4msd254j" path="res://img/tiempo.png" id="13_ycdy4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shl25"]
 bg_color = Color(0.365181, 0.62127, 0.863581, 1)
@@ -74,7 +75,23 @@ texture = ExtResource("10_efxa6")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lquwl")]
 
+[node name="ClockTimer" type="Timer" parent="."]
+wait_time = 0.4
+
 [node name="MoveTimer" type="Timer" parent="."]
 wait_time = 0.2
 
+[node name="Tiempo" type="TextureProgressBar" parent="."]
+show_behind_parent = true
+z_index = -10
+offset_left = 95.0
+offset_top = 133.0
+offset_right = 200.0
+offset_bottom = 233.0
+value = 100.0
+fill_mode = 4
+texture_progress = ExtResource("13_ycdy4")
+tint_progress = Color(0.501961, 0.941176, 0.27451, 1)
+
+[connection signal="timeout" from="ClockTimer" to="." method="_on_clock_timer_timeout"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
