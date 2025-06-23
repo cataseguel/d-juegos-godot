@@ -166,24 +166,28 @@ func move_jugador():
 	if can_move:
 		if Input.is_action_pressed("move_down"):
 			move_direction = down
-			game_started = true
 			can_move = false
-			$ClockTimer.start()
+			if (game_started == false):
+				$ClockTimer.start()
+				game_started = true
 		if Input.is_action_pressed("move_up"):
 			move_direction = up
-			game_started = true
 			can_move = false
-			$ClockTimer.start()
+			if (game_started == false):
+				$ClockTimer.start()
+				game_started = true
 		if Input.is_action_pressed("move_left"):
 			move_direction = left
-			game_started = true
 			can_move = false
-			$ClockTimer.start()
+			if (game_started == false):
+				$ClockTimer.start()
+				game_started = true
 		if Input.is_action_pressed("move_right"):
 			move_direction = right
-			game_started = true
 			can_move = false
-			$ClockTimer.start()
+			if (game_started == false):
+				$ClockTimer.start()
+				game_started = true
 		# Agrega el movimiento a la traza
 		old_data = [] + jugador_data
 		# Limita al jugador dentro de los limites de la grilla
@@ -298,6 +302,7 @@ func _on_clock_timer_timeout() -> void:
 	
 # Mostrar una pantalla de resultado del puzzle
 func show_result_screen():
+	$ClockTimer.stop() #que se detenga el tiempo cuando se termine el nivel
 	var total_correctos := 0
 	var total_errores := 0
 	var total_objetivo := 0
