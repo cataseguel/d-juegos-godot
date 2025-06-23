@@ -74,6 +74,7 @@ position = Vector2(960, 540)
 texture = ExtResource("10_efxa6")
 
 [node name="CanvasLayer" parent="." instance=ExtResource("3_lquwl")]
+layer = 1
 
 [node name="ClockTimer" type="Timer" parent="."]
 wait_time = 0.4
@@ -92,6 +93,63 @@ value = 100.0
 fill_mode = 4
 texture_progress = ExtResource("13_ycdy4")
 tint_progress = Color(0.501961, 0.941176, 0.27451, 1)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="PantallaResultado" type="Control" parent="CanvasLayer2"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2/PantallaResultado"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0.374139, 0.374139, 0.374139, 0.780392)
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer2/PantallaResultado"]
+layout_mode = 2
+offset_left = 450.0
+offset_top = 200.0
+offset_right = 1450.0
+offset_bottom = 800.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PantallaResultado"]
+layout_mode = 0
+offset_left = 733.0
+offset_top = 322.0
+offset_right = 1193.0
+offset_bottom = 569.0
+
+[node name="PorcentajeLabel" type="Label" parent="CanvasLayer2/PantallaResultado/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Aprobación"
+vertical_alignment = 1
+
+[node name="TiempoLabel" type="Label" parent="CanvasLayer2/PantallaResultado/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 35
+text = "Tiempo"
+
+[node name="ComentarioLabel" type="Label" parent="CanvasLayer2/PantallaResultado/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 20
+text = "Comentario"
+
+[node name="Button" type="Button" parent="CanvasLayer2/PantallaResultado"]
+layout_mode = 0
+offset_left = 868.0
+offset_top = 678.0
+offset_right = 1071.0
+offset_bottom = 727.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Continuar"
 
 [connection signal="timeout" from="ClockTimer" to="." method="_on_clock_timer_timeout"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]

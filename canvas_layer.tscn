@@ -7,6 +7,7 @@ bg_color = Color(0.763826, 0.460197, 0.842748, 1)
 font_size = 27
 
 [node name="Canvas_Layer" type="CanvasLayer"]
+layer = 0
 
 [node name="Progreso" type="Panel" parent="."]
 anchors_preset = -1

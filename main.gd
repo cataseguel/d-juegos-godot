@@ -21,7 +21,7 @@ var levels = [
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
 	[0,0,1,0,0,0,0,0,0,0,0,0,1,0,0],
-	[0,0,1,1,1,1,1,1,1,1,1,1,1,0,0],
+	[0,0,1,1,1,1,1,-1,1,1,1,1,1,0,0],
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
   ],
   [
@@ -97,6 +97,9 @@ var offset_small = Vector2(1039, 116)
 
 # Cuando el juego esta listo se configuran los estados iniciales
 func _ready():
+	#Pantalla del resultado del puzzle invisible al inicio
+	$CanvasLayer2/PantallaResultado.visible = false
+	
 	$CanvasLayer.get_node("ProgresoLabel").text = "Progreso: "  + str(score)
 	move_direction = Vector2(0, 0)
 	level = levels[level_index]
@@ -200,6 +203,8 @@ func move_jugador():
 			validate_step(jugador_data[0])
 		# Dibuja el segmento del trazo
 		draw_segment(jugador_data[0])
+		#Chequear si se terminó el puzzle
+		check_if_finished()
 		# Esperar un tiempo antes de seguir moviendo al jugador
 		$MoveTimer.start()
 
@@ -247,9 +252,100 @@ func validate_step(nuevo_paso):
 
 # Modifica la barra en base al progreso del jugador
 func set_progress():
-	$CanvasLayer.get_node("Progreso").scale.x = float(score) / 100.0
+	var total_correctos := 0
+	var total_errores := 0
+	var total_objetivo := 0
+
+	# Calcular total de casillas correctas en el nivel actual
+	for y in range(level.size()):
+		for x in range(level[y].size()):
+			if level[y][x] == 1:
+				total_objetivo += 1
+
+	# Revisar el recorrido del jugador
+	for paso in jugador_data:
+		var x := int(paso.x)
+		var y := int(paso.y)
+
+		if y >= 0 and y < level.size() and x >= 0 and x < level[y].size():
+			if level[y][x] == 1:
+				total_correctos += 1
+			else:
+				total_errores += 1
+
+	# Cálculo ajustado al nivel actual + errores
+	var total := total_objetivo + total_errores
+
+	if total > 0:
+		var progreso := float(total_correctos) / float(total)
+		$CanvasLayer.get_node("Progreso").scale.x = progreso
+	else:
+		$CanvasLayer.get_node("Progreso").scale.x = 0
+		
+# Para chequear que se terminó el nivel
+func check_if_finished():
+	if jugador_data.size() < 2:
+		return
+
+# Compara la posición actual del jugador con el punto de inicio
+	if jugador_data[-1] == start_pos:
+		show_result_screen()
 
 func _on_clock_timer_timeout() -> void:
 	$ClockTimer.start()
 	$Tiempo.value = time
 	time -= 1
+	
+# Mostrar una pantalla de resultado del puzzle
+func show_result_screen():
+	var total_correctos := 0
+	var total_errores := 0
+	var total_objetivo := 0
+
+	# Calcular total de casillas correctas en el nivel actual
+	for y in range(level.size()):
+		for x in range(level[y].size()):
+			if level[y][x] == 1:
+				total_objetivo += 1
+
+	# Revisar el recorrido del jugador
+	for paso in jugador_data:
+		var x := int(paso.x)
+		var y := int(paso.y)
+
+		if y >= 0 and y < level.size() and x >= 0 and x < level[y].size():
+			if level[y][x] == 1:
+				total_correctos += 1
+			else:
+				total_errores += 1
+
+	# Calcular progreso
+	var total := total_objetivo + total_errores
+	var progreso := 0.0
+
+	if total > 0:
+		progreso = float(total_correctos) / float(total)
+
+	# Mostrar pantalla resultado
+	$CanvasLayer2/PantallaResultado.visible = true
+
+	# Mostrar porcentaje numérico
+	var porcentaje := int(progreso * 100)
+	$CanvasLayer2/PantallaResultado/VBoxContainer/PorcentajeLabel.text = str(porcentaje) + "% completado"
+
+	# Mostrar tiempo final
+	$CanvasLayer2/PantallaResultado/VBoxContainer/TiempoLabel.text = "Tiempo: " + str(int(100.0 - time)) + " segundos"
+
+	# Mostrar comentario según porcentaje
+	var comentario := ""
+	if porcentaje <= 30:
+		comentario = "Necesitas más práctica."
+	elif porcentaje <= 60:
+		comentario = "¡Vas por buen camino! Inténtalo otra vez."
+	else:
+		comentario = "¡Excelente trabajo!"
+
+	$CanvasLayer2/PantallaResultado/VBoxContainer/ComentarioLabel.text = comentario
+
+	
+	
