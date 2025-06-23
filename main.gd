@@ -68,6 +68,7 @@ var inside : int = 0
 var score : int = 0
 var level : Array = []
 var time = 100.0
+var juego_terminado : bool = false
 
 # Movimiento y estado del jugador
 var move_direction = Vector2(0, 0)
@@ -126,6 +127,8 @@ func change_controls():
 
 # Chequea si se hizo click en alguna parte de la pantalla
 func _input(event):
+	if juego_terminado:
+		return  # no aceptar más clicks ni teclas si ya se terminó
 	if event is InputEventMouseButton:
 		restart_level(event)
 		
@@ -161,6 +164,8 @@ func set_starting_point():
 
 # Mueve el jugador en base a las teclas presionadas
 func move_jugador():
+	if juego_terminado: #Que no se mueva cuando termina el juego
+		return
 	move_direction = Vector2(0, 0)
 	# Chequear las teclas presionadas por el jugador para moverse
 	if can_move:
@@ -231,16 +236,16 @@ func set_queen_state():
 
 # Reinicia el nivel al hacer click en el tarrito de borrar
 func restart_level(event):
-	var w = $Borrar.texture.get_width() * $Borrar.scale.x
-	var h = $Borrar.texture.get_height() * $Borrar.scale.y
-	var pos_x = $Borrar.position[0]
-	var pos_y = $Borrar.position[1]
-	var mouse_x = event.position[0]
-	var mouse_y = event.position[1]
-	
-	if (mouse_x > pos_x and mouse_x < pos_x + w):
-		if (mouse_y > pos_y and mouse_y < pos_y + h):
+	if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		var mouse_pos = event.position
+		var borrar_pos = $Borrar.global_position
+		var borrar_size = $Borrar.texture.get_size() * $Borrar.scale
+
+		var rect = Rect2(borrar_pos - borrar_size * 0.5, borrar_size)
+		
+		if rect.has_point(mouse_pos):
 			get_tree().reload_current_scene()
+
 
 # Cuando pase un tiempo permitir al jugador moverse denuevo
 func _on_move_timer_timeout() -> void:
@@ -302,6 +307,7 @@ func _on_clock_timer_timeout() -> void:
 	
 # Mostrar una pantalla de resultado del puzzle
 func show_result_screen():
+	juego_terminado = true
 	$ClockTimer.stop() #que se detenga el tiempo cuando se termine el nivel
 	var total_correctos := 0
 	var total_errores := 0
@@ -330,9 +336,19 @@ func show_result_screen():
 
 	if total > 0:
 		progreso = float(total_correctos) / float(total)
+		
+	#Variable para terminar el juego
+
+
 
 	# Mostrar pantalla resultado
-	$CanvasLayer2/PantallaResultado.visible = true
+	var resultado = $CanvasLayer2/PantallaResultado
+	resultado.visible = true
+	resultado.modulate.a = 0.0
+
+	# Para fade in de la pantalla resultado
+	var tween = create_tween()
+	tween.tween_property(resultado, "modulate:a", 1.0, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	# Mostrar porcentaje numérico
 	var porcentaje := int(progreso * 100)

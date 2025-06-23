@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://du6sj4jrsh4cw"]
+[gd_scene load_steps=18 format=3 uid="uid://du6sj4jrsh4cw"]
 
 [ext_resource type="Script" uid="uid://n3pdgmn132sd" path="res://main.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://bv58oirqi3j0e" path="res://img/cuadro.png" id="2_1bvp3"]
@@ -13,6 +13,8 @@
 [ext_resource type="Texture2D" uid="uid://c6vd4umlsfk2a" path="res://img/grilla.png" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://3k50q4ehmukb" path="res://img/imaginacion.png" id="10_efxa6"]
 [ext_resource type="Texture2D" uid="uid://b5v0r4msd254j" path="res://img/tiempo.png" id="13_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://cfbt703pd5n65" path="res://img/cuadrosolo.png" id="14_vivmo"]
+[ext_resource type="Texture2D" uid="uid://dcn1803qcxc42" path="res://img/Pintura1.png" id="15_2cqfq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shl25"]
 bg_color = Color(0.365181, 0.62127, 0.863581, 1)
@@ -107,20 +109,31 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
-color = Color(0.374139, 0.374139, 0.374139, 0.780392)
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer2/PantallaResultado"]
+[node name="Cuadrosolo" type="Sprite2D" parent="CanvasLayer2/PantallaResultado"]
+position = Vector2(960, 540)
+texture = ExtResource("14_vivmo")
+
+[node name="Pintura1" type="Sprite2D" parent="CanvasLayer2/PantallaResultado"]
+position = Vector2(447, 608)
+scale = Vector2(0.235, 0.235)
+texture = ExtResource("15_2cqfq")
+
+[node name="PuzzleTerminado" type="Label" parent="CanvasLayer2/PantallaResultado"]
 layout_mode = 2
-offset_left = 450.0
-offset_top = 200.0
-offset_right = 1450.0
-offset_bottom = 800.0
+offset_left = 933.0
+offset_top = 161.0
+offset_right = 1393.0
+offset_bottom = 224.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 45
+text = "¡Puzzle Terminado!"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer2/PantallaResultado"]
 layout_mode = 0
-offset_left = 733.0
+offset_left = 933.0
 offset_top = 322.0
-offset_right = 1193.0
+offset_right = 1393.0
 offset_bottom = 569.0
 
 [node name="PorcentajeLabel" type="Label" parent="CanvasLayer2/PantallaResultado/VBoxContainer"]
@@ -144,12 +157,14 @@ text = "Comentario"
 
 [node name="Button" type="Button" parent="CanvasLayer2/PantallaResultado"]
 layout_mode = 0
-offset_left = 868.0
+offset_left = 935.0
 offset_top = 678.0
-offset_right = 1071.0
+offset_right = 1138.0
 offset_bottom = 727.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Continuar"
+
+[node name="TweenPantalla" type="Node" parent="CanvasLayer2"]
 
 [connection signal="timeout" from="ClockTimer" to="." method="_on_clock_timer_timeout"]
 [connection signal="timeout" from="MoveTimer" to="." method="_on_move_timer_timeout"]
