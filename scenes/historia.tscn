@@ -10,7 +10,6 @@
 script = ExtResource("1_4605v")
 
 [node name="Bodegon-d1" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(960, 540)
 texture = ExtResource("1_5o4vn")
 
@@ -31,7 +30,7 @@ offset_top = -540.0
 offset_right = -920.0
 offset_bottom = -500.0
 
-[node name="Button" type="Button" parent="Bodegon-d1/Control"]
+[node name="Button1" type="Button" parent="Bodegon-d1/Control"]
 layout_mode = 0
 offset_left = 1254.0
 offset_top = 900.0
@@ -63,13 +62,13 @@ offset_right = 670.0
 offset_bottom = 446.0
 color = Color(0.695503, 0.695503, 0.695503, 1)
 
-[node name="Label" type="Label" parent="Reina-historia/Control2"]
+[node name="TextoReina" type="Label" parent="Reina-historia/Control2"]
 offset_left = -580.0
 offset_top = 247.0
 offset_right = 442.0
 offset_bottom = 296.0
 theme_override_font_sizes/font_size = 35
-text = "Soy la Reina de estas tierras, y tú... el nuevo artista, ¿verdad?"
+text = "Comentario "
 
 [node name="Control" type="Control" parent="Reina-historia"]
 layout_mode = 3
@@ -94,7 +93,7 @@ offset_bottom = 186.0
 theme_override_font_sizes/font_size = 35
 text = "Reina"
 
-[node name="Button" type="Button" parent="Reina-historia"]
+[node name="Button2" type="Button" parent="Reina-historia"]
 offset_left = 294.0
 offset_top = 360.0
 offset_right = 624.0
@@ -102,5 +101,5 @@ offset_bottom = 418.0
 theme_override_font_sizes/font_size = 35
 text = "Continuar"
 
-[connection signal="pressed" from="Bodegon-d1/Control/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Reina-historia/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Bodegon-d1/Control/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Reina-historia/Button2" to="." method="_on_button_2_pressed"]
