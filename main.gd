@@ -147,11 +147,16 @@ func draw_segment(pos):
 func draw_reference():
 	for i in range(cells):
 		for j in range(cells):
-			if (level[i][j] == 1 or level[i][j] == -1):
-				var ref_trace = reference_scene.instantiate()
-				var pos = Vector2(j, i)
-				ref_trace.position = (pos * cell_size_small) + offset_small
-				add_child(ref_trace)
+			var valor = level[i][j]
+			if valor == 1 or valor == -1:
+				var ref = reference_scene.instantiate()
+				ref.position = Vector2(j, i) * cell_size_small + offset_small
+
+				# Si es -1, cambia el color del Panel
+				if valor == -1:
+					ref.modulate = Color.ORANGE  # Cambia a otro si prefieres
+
+				add_child(ref)
 
 # Dibuja el trazo de referencia a seguir
 func set_starting_point():
