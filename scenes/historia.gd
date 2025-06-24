@@ -44,6 +44,6 @@ func _on_button_2_pressed() -> void:
 	if indice_dialogo < dialogos.size():
 		mostrar_dialogo()
 	else:
-		# Aquí podrías avanzar a la siguiente escena o dejar un mensaje
-		print("Fin del diálogo")
-		# ejemplo: get_tree().change_scene_to_file("res://Escenas/Nivel1.tscn")
+		#pasa a la escena del puzzle
+		get_tree().change_scene_to_file("res://main.tscn")
+		
