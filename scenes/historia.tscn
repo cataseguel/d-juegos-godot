@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://tet4tfi6qbbe"]
+
+[ext_resource type="Texture2D" uid="uid://dgpi4p1qja3te" path="res://img/Bodegon-d1.png" id="1_5o4vn"]
+[ext_resource type="Script" uid="uid://6n1plp8we4ch" path="res://scenes/historia.gd" id="1_4605v"]
+[ext_resource type="Texture2D" uid="uid://p3u30iu8egrt" path="res://img/reina-historia.png" id="3_w5wgw"]
+[ext_resource type="Texture2D" uid="uid://bvp76jejnpyb7" path="res://img/silla-historia.png" id="4_ot215"]
+[ext_resource type="Texture2D" uid="uid://dgn75kwh0raw5" path="res://img/fondoreina-historia.png" id="5_vtt1t"]
+
+[node name="Historia" type="Node2D"]
+script = ExtResource("1_4605v")
+
+[node name="Bodegon-d1" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+texture = ExtResource("1_5o4vn")
+
+[node name="Label" type="Label" parent="Bodegon-d1"]
+offset_left = -43.0
+offset_top = -354.0
+offset_right = 249.0
+offset_bottom = -197.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 115
+text = "DÍA 1"
+
+[node name="Control" type="Control" parent="Bodegon-d1"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -960.0
+offset_top = -540.0
+offset_right = -920.0
+offset_bottom = -500.0
+
+[node name="Button" type="Button" parent="Bodegon-d1/Control"]
+layout_mode = 0
+offset_left = 1254.0
+offset_top = 900.0
+offset_right = 1584.0
+offset_bottom = 958.0
+theme_override_font_sizes/font_size = 35
+text = "Continuar"
+
+[node name="Reina-historia" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("3_w5wgw")
+
+[node name="Silla-historia" type="Sprite2D" parent="Reina-historia"]
+texture = ExtResource("4_ot215")
+
+[node name="Fondoreina-historia" type="Sprite2D" parent="Reina-historia"]
+texture = ExtResource("5_vtt1t")
+
+[node name="Control2" type="Control" parent="Reina-historia"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CuadroFondoTexto" type="ColorRect" parent="Reina-historia/Control2"]
+offset_left = -630.0
+offset_top = 200.0
+offset_right = 670.0
+offset_bottom = 446.0
+color = Color(0.695503, 0.695503, 0.695503, 1)
+
+[node name="Label" type="Label" parent="Reina-historia/Control2"]
+offset_left = -580.0
+offset_top = 247.0
+offset_right = 442.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 35
+text = "Soy la Reina de estas tierras, y tú... el nuevo artista, ¿verdad?"
+
+[node name="Control" type="Control" parent="Reina-historia"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="CuadroNombreReina" type="ColorRect" parent="Reina-historia/Control"]
+offset_left = -630.0
+offset_top = 137.0
+offset_right = 670.0
+offset_bottom = 383.0
+scale = Vector2(0.200002, 0.200003)
+color = Color(0.694118, 0.694118, 0.694118, 1)
+
+[node name="Label" type="Label" parent="Reina-historia/Control"]
+layout_mode = 0
+offset_left = -547.0
+offset_top = 137.0
+offset_right = -452.0
+offset_bottom = 186.0
+theme_override_font_sizes/font_size = 35
+text = "Reina"
+
+[node name="Button" type="Button" parent="Reina-historia"]
+offset_left = 294.0
+offset_top = 360.0
+offset_right = 624.0
+offset_bottom = 418.0
+theme_override_font_sizes/font_size = 35
+text = "Continuar"
+
+[connection signal="pressed" from="Bodegon-d1/Control/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Reina-historia/Button" to="." method="_on_button_pressed"]

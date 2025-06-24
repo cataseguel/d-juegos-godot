@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Examenjueguitos"
-run/main_scene="uid://du6sj4jrsh4cw"
+run/main_scene="uid://djjjuqw1bj4r1"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [display]

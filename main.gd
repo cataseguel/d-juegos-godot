@@ -336,9 +336,6 @@ func show_result_screen():
 
 	if total > 0:
 		progreso = float(total_correctos) / float(total)
-		
-	#Variable para terminar el juego
-
 
 
 	# Mostrar pantalla resultado

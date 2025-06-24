@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://djjjuqw1bj4r1"]
+
+[ext_resource type="Script" uid="uid://g7r2ijhq7orc" path="res://scenes/menu.gd" id="1_vjb58"]
+[ext_resource type="Texture2D" uid="uid://do57eq1b6jngx" path="res://img/Menu.png" id="1_yqeox"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vjb58"]
+bg_color = Color(0.382929, 0.235275, 0.544243, 1)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_vjb58")
+
+[node name="Menu" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = ExtResource("1_yqeox")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 1245.0
+offset_top = 440.0
+offset_right = 1564.0
+offset_bottom = 690.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="NuevaPartida" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_vjb58")
+text = "Nueva Partida"
+
+[node name="Ajustes" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_vjb58")
+text = "Ajustes"
+
+[node name="Salir" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_vjb58")
+text = "Salir"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/NuevaPartida" to="." method="_on_nueva_partida_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Ajustes" to="." method="_on_ajustes_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Salir" to="." method="_on_salir_pressed"]
